@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tela_inicio"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Menu_main" >
+
+    <ImageButton
+        android:id="@+id/bt_creditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bt_instrucoes"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/botao_creditos"
+        android:onClick="click_Creditos"
+     	
+        android:text="Créditos" />
+
+    <ImageButton
+        android:id="@+id/bt_instrucoes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_creditos"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/botao_instrucoes"
+        android:onClick="click_Instrucoes"
+        android:text="Instruções" />
+
+    <ImageButton
+        android:id="@+id/bt_comecar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_instrucoes"
+        android:layout_alignLeft="@+id/bt_instrucoes"
+        android:background="@drawable/botao_jogar"
+        android:text="Jogar" />
+
+</RelativeLayout>

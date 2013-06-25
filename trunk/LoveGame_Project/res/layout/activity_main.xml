@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/activateBtButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginTop="24dp"
+        android:layout_weight="0.22"
+        android:onClick="onClick_ActivateBluetooth"
+        android:text="@string/turn_bt_on" />
+
+    <Button
+        android:id="@+id/ScanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:onClick="onClick_Scan"
+        android:text="@string/connect" />
+
+    <Button
+        android:id="@+id/leaveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/leave" 
+        android:onClick="onClick_leave"/>
+        
+
+
+</LinearLayout>
