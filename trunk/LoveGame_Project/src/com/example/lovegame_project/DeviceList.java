@@ -167,6 +167,8 @@ public class DeviceList extends Activity {
 				super.handleMessage(msg);
 			}
 		};
+		
+		MinhasCoisas.Show("log");
 
 	}
 

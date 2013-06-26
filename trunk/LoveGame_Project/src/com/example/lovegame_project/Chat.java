@@ -28,27 +28,28 @@ public class Chat extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
+		//Criar classe para mudar orientacao e mexer com full screen etc
 		// Screen adjustments
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
+		setContentView(R.layout.activity_chat);
+		
+		MinhasCoisas.setCurrentActivity(this);
+		
+		
 		this.bt_enviar = (Button)findViewById( R.id.bt_enviar);
 		this.edit_resposta = (EditText)findViewById( R.id.edit_resposta);
 		this.textv_pergunta = (TextView)findViewById(R.id.pergunta);
 		this.textv_resposta = (TextView)findViewById(R.id.resposta);
 		
-		
-		//this.edit_resposta.setEnabled(false);
-		
-		//ChangeInterface(JogoEmSi.get().getTurn());
-		
-		setContentView(R.layout.activity_chat);
-		MinhasCoisas.setCurrentActivity(this);
-		
-		MinhasCoisas.Show(String.valueOf(JogoEmSi.get().getTurn()));
+		if(this.bt_enviar != null)
+		{
+			MinhasCoisas.Show("n Nulo");
+			this.bt_enviar.setText("Thauan Lopes");
+		}
 	}
 
 	public void ChangeVisualization(boolean turn)
