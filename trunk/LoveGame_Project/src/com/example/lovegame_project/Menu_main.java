@@ -10,6 +10,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -47,11 +48,9 @@ public class Menu_main extends Activity {
 			@Override
 			public void onClick(View v) {
 				try{
-
-					
 					if(btAdapter != null)
 					{
-						//MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");
+						MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");
 
 						if (!btAdapter.isEnabled()) {
 
@@ -65,7 +64,7 @@ public class Menu_main extends Activity {
 						}	
 					}else
 					{
-						MinhasCoisas.Show("Este telefone não possui tecnologia Bluetooth");
+						MinhasCoisas.Show("Este telefone não possui tecnologia Bluetooth. Não será possível jogar.");
 					}
 
 				}catch(Exception e)
@@ -86,37 +85,7 @@ public class Menu_main extends Activity {
 		ChangeLayout.getInstance().changeLayout(Menu_main.this,Instrucoes.class);
 
 	}
-	public void PegarPergunta()
-	{
-		InputStream is =(getResources().openRawResource(R.raw.mydata));
-		String strContent;
-		
-		BufferedReader bReader = new BufferedReader(new InputStreamReader(is));
-        StringBuffer sbfFileContents = new StringBuffer();
-        String line = null;
-       
-        //read file line by line
-        try {
-			while( (line = bReader.readLine()) != null){
-			        sbfFileContents.append(line);
-			}
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-       
-        //finally convert StringBuffer object to String!
-        strContent = sbfFileContents.toString();
-        
-        String jsonString = strContent;
-		
-		mainClass.jp = JsonPut.getInstance();
-		mainClass.jp.declareObject(jsonString);
-		//Resources res = getResources();
-		
-		MinhasCoisas.Show(mainClass.jp.getJson("Pergunta"+2));	
 	
-	}
 	public void click_Achievements(View v)
 	{
 		ChangeLayout.getInstance().changeLayout(Menu_main.this,Achievements_menu.class);
@@ -129,7 +98,18 @@ public class Menu_main extends Activity {
 		//apenas informa no rodapé inferior da tela do Android o ocorrido
 		Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
 	}
+	
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    
+	    if (requestCode == REQUEST.REQUEST_ENABLE_BT) {
+	        
+	        if (resultCode == RESULT_OK) {
+	        	ChangeLayout.getInstance().changeLayout(Menu_main.this, DeviceList.class);
+	        }
+	    }
+	}
 	@Override
 	public void onDestroy()
 	{
