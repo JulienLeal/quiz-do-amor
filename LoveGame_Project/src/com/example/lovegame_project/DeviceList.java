@@ -60,7 +60,10 @@ public class DeviceList extends Activity {
 	{
 		super.onStart();
 
+		MinhasCoisas.Show("DeviceList OnStart");
 		this.newDevicesData.clear();
+		JogoEmSi.get().Reset2();
+		this.btManager = new BluetoothConnectionManager(getApplicationContext());
 
 	}
 
@@ -70,10 +73,10 @@ public class DeviceList extends Activity {
 		
 
 		// Screen adjustments
-//		requestWindowFeature(Window.FEATURE_NO_TITLE);
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
 		setContentView(R.layout.activity_device_list);
 
@@ -85,7 +88,8 @@ public class DeviceList extends Activity {
 		b.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/fonte.TTF"));
 		
 		MinhasCoisas.setCurrentActivity(this);
-
+		MinhasCoisas.Show(("OnCreate DeviceList"));
+		
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
 
 		this.pairedDevicesList = (ListView)findViewById(R.id.paired_devices);
@@ -129,8 +133,6 @@ public class DeviceList extends Activity {
 				MinhasCoisas.Show("Aguarde para entrar no jogo.");
 				Cliente cliente = new Cliente(newDevices.get(position), getApplicationContext(), true);
 				MinhasCoisas.setCliente(cliente);
-
-
 			}
 		});
 
@@ -167,9 +169,6 @@ public class DeviceList extends Activity {
 				super.handleMessage(msg);
 			}
 		};
-		
-		MinhasCoisas.Show("log");
-
 	}
 
 	public void AtualizarNewDevicesList()

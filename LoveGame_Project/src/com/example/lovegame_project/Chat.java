@@ -31,6 +31,20 @@ public class Chat extends Activity {
 	private ImageButton botaoErrado;
 	private ImageButton botaoCerto;
 	
+	private boolean Jogou = false;
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		if(!this.Jogou)
+		{
+			this.Jogou = true;
+		}else
+		{
+			finish();
+		}
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +77,7 @@ public class Chat extends Activity {
 		}
 		
 		ChangeVisualization(JogoEmSi.get().getTurn());
-
+		MinhasCoisas.Show(String.valueOf( JogoEmSi.get().getTurn()));
 	}
 	public void ChangePergunta(String pergunta)
 	{
@@ -153,10 +167,45 @@ public class Chat extends Activity {
 	
 	public void onClickCerto(View v)
 	{
+		String msg = "Botao Certo/" + "thauan";
+		JogoEmSi.get().Send(msg);
 		
+		JogoEmSi.get().setTurn(true);
+		JogoEmSi.get().rodada++;
+		JogoEmSi.get().pontos++;
+		JogoEmSi.get().TestarFim();
+		
+		try{
+		MinhasCoisas.Show(String.valueOf(JogoEmSi.get().pontos) + " pontos");
+	
+		this.textv_resposta.setText("");
+		ChangeVisualization(JogoEmSi.get().getTurn());
+		}catch(Exception e)
+		{
+			Log.i(TAG, "Erro ao intentar FimDeJogo");
+		}
+		
+
 	}
 	public void onClickErrado(View v)
 	{
+		String msg = "Botao Errado/" + "thauan";
+		JogoEmSi.get().Send(msg);
+		
+		JogoEmSi.get().setTurn(true);
+		JogoEmSi.get().rodada++;
+		JogoEmSi.get().TestarFim();
+		
+		try{
+		MinhasCoisas.Show(String.valueOf(JogoEmSi.get().pontos) + " pontos");
+	
+		this.textv_resposta.setText("");
+		ChangeVisualization(JogoEmSi.get().getTurn());
+		}catch(Exception e)
+		{
+			Log.i(TAG, "Erro ao intentar FimDeJogo");
+		}
+
 		
 	}
 	
@@ -170,18 +219,14 @@ public class Chat extends Activity {
 	public void onClick_SendButton(View v)
 	{
 		Log.i(TAG, "tentativa de enviar mensagem");
-		EditText editText = (EditText) findViewById(R.id.edit_resposta);
-		JogoEmSi.get().Send(editText.getText().toString());
+		String mensagem = "Resposta/" + this.edit_resposta.getText().toString();
+		JogoEmSi.get().Send(mensagem);
 	}
-	
-	public void MudarPergunta()
-	{
-
-	}
-
 	@Override
 	public void onDestroy()
 	{
 		super.onDestroy();
+		MinhasCoisas.getCliente().cancel();
+		JogoEmSi.get().Reset2();
 	}
 }

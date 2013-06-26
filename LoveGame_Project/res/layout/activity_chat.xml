@@ -17,20 +17,6 @@
         android:text="..."
         android:textColor="@android:color/white"
         android:textSize="18sp" />
-    
-    <TextView
-        android:id="@+id/resposta"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="35dp"
-        android:layout_above="@+id/bt_enviar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="18dp"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
 
     <Button
         android:id="@+id/bt_enviar"
@@ -49,6 +35,7 @@
         android:layout_alignLeft="@+id/edit_resposta"
         android:layout_alignTop="@+id/bt_enviar"
         android:layout_marginLeft="42dp"
+        android:onClick="onClickCerto"
         android:background="@drawable/botao_certo" />
 
     <EditText
@@ -67,7 +54,20 @@
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="true"
         android:layout_below="@+id/resposta"
+        android:onClick="onClickErrado"
         android:layout_marginLeft="230dp"
         android:background="@drawable/botao_errado" />
+
+    <TextView
+        android:id="@+id/resposta"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/bt_enviar"
+        android:layout_alignRight="@+id/pergunta"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="..."
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
 
 </RelativeLayout>
