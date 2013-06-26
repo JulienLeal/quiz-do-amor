@@ -16,7 +16,7 @@
         android:layout_marginTop="35dp"
         android:text="Qual a cor do lápis que você mais gosta, bebê?"
         android:textColor="@android:color/white"
-        android:textSize="20dp" />
+        android:textSize="18sp" />
     
     <TextView
         android:id="@+id/resposta"

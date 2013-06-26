@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class JogoEmSi {
 
@@ -60,7 +61,17 @@ public class JogoEmSi {
 	{
 		// handle the message
 		MinhasCoisas.Show(mensagem);
-		this.turn = !turn;
+
+		this.turn = !turn;	
+		MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+			@Override
+			public void run() {
+				// por para trocar somente quando receber mensagem de resposta
+				((Chat)MinhasCoisas.getCurrentActivity()).ChangeVisualization(turn);
+				((Chat)MinhasCoisas.getCurrentActivity()).ChangePergunta();
+			}
+		});
+	
 		MinhasCoisas.Show(String.valueOf(this.turn));
 	}
 }
