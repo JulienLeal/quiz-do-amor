@@ -84,10 +84,8 @@ public class BluetoothConnectionManager implements Runnable{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}					
-			
 		}
 	}		
-	
 	
 	public static void Cancel()
 	{

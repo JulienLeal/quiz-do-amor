@@ -1,5 +1,6 @@
 package com.example.lovegame_project;
 
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,13 +44,8 @@ public class JogoEmSi {
 	{
 		
 		try{
-		if(this.turn){
 			MinhasCoisas.getCliente().write(mensagem);
-			this.turn = !turn;
-		}else
-		{
-			MinhasCoisas.Show("Sinto muito, mas não é sua vez... :(");
-		}
+			
 		}catch(Exception e)
 		{
 			Log.i(TAG, "Erro", e);
@@ -58,20 +54,57 @@ public class JogoEmSi {
 	}
 	
 	public void Handle(String mensagem)
-	{
-		// handle the message
-		MinhasCoisas.Show(mensagem);
-
-		this.turn = !turn;	
-		MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
-			@Override
-			public void run() {
-				// por para trocar somente quando receber mensagem de resposta
-				((Chat)MinhasCoisas.getCurrentActivity()).ChangeVisualization(turn);
-				((Chat)MinhasCoisas.getCurrentActivity()).ChangePergunta();
-			}
-		});
+	{	
+		// Tratamento da mensagem
+		final String[] protocol = mensagem.split("/");
+		
+		// Criar Constantes em uma classe para isso;
+		if(protocol[0].equals("Pergunta"))
+		{
+			MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					((Chat)MinhasCoisas.getCurrentActivity()).ChangePergunta(protocol[1]);
+				}
+			});
+			
+		}else if(protocol[0].equals("Botao Certo"))
+		{			
+			MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					((Chat)MinhasCoisas.getCurrentActivity()).ChangeVisualization(turn);
+				}
+			});
+			this.turn = !turn;	
+			this.pontos++;
+			MinhasCoisas.Show(String.valueOf(pontos) + " pontos");
+			
+				
+		}else if(protocol[0].equals("Botao Errado"))
+		{			
+			MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					((Chat)MinhasCoisas.getCurrentActivity()).ChangeVisualization(turn);
+				}
+			});
+			this.turn = !turn;	
+			MinhasCoisas.Show(String.valueOf(pontos) + " pontos");
+		}else if(protocol[0].equals("Resposta"))
+		{
+			MinhasCoisas.getCurrentActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					((Chat)MinhasCoisas.getCurrentActivity())
+				}
+			});
+		}
+		//MinhasCoisas.Show(String.valueOf(this.turn));
+	}
 	
-		MinhasCoisas.Show(String.valueOf(this.turn));
+	public void Reset()
+	{
+		// zera todas as variáveis
 	}
 }

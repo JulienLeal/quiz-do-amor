@@ -70,10 +70,10 @@ public class DeviceList extends Activity {
 		
 
 		// Screen adjustments
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+//		requestWindowFeature(Window.FEATURE_NO_TITLE);
+//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+//				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		
 		setContentView(R.layout.activity_device_list);
 
@@ -97,7 +97,7 @@ public class DeviceList extends Activity {
 		pairedDevices = new ArrayList<BluetoothDevice>();  
 		newDevices = new ArrayList<BluetoothDevice>();
 
-		if(this.discoverableIntent == null ){
+		if(this.discoverableIntent == null){
 			this.discoverableIntent = new
 					Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
 			discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 360);
