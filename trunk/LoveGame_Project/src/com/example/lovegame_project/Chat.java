@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class Chat extends Activity {
@@ -27,6 +28,8 @@ public class Chat extends Activity {
 	private EditText edit_resposta;
 	private TextView textv_pergunta;
 	private TextView textv_resposta;
+	private ImageButton botaoErrado;
+	private ImageButton botaoCerto;
 	
 	
 	@Override
@@ -34,7 +37,10 @@ public class Chat extends Activity {
 		super.onCreate(savedInstanceState);
 		
 		//Criar classe para mudar orientacao e mexer com full screen etc
-		// Screen adjustments
+		// Screen adjustments 
+		//	Atenção: É preciso mudar em layout para horizontal, caso contrário serão 
+		//	criadas duas activitys. Lembrar caso Toast.
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -48,13 +54,28 @@ public class Chat extends Activity {
 		this.edit_resposta = (EditText)findViewById( R.id.edit_resposta);
 		this.textv_pergunta = (TextView)findViewById(R.id.pergunta);
 		this.textv_resposta = (TextView)findViewById(R.id.resposta);
+		this.botaoCerto = (ImageButton)findViewById(R.id.botao_certo);
+		this.botaoErrado = (ImageButton)findViewById(R.id.botao_errado);
 		
-		this.textv_pergunta.setText(PegarPergunta());
-	}
+		if(!JogoEmSi.get().getTurn())
+		{
+			NovaPergunta();
+		}
+		
+		ChangeVisualization(JogoEmSi.get().getTurn());
 
-	public void ChangePergunta()
+	}
+	public void ChangePergunta(String pergunta)
 	{
-		this.textv_pergunta.setText(PegarPergunta());
+		this.textv_pergunta.setText(pergunta);
+	}
+	
+	public void NovaPergunta()
+	{
+		String pergunta = PegarPergunta();
+		String protocol = "Pergunta/";
+		JogoEmSi.get().Send(protocol + pergunta);
+		this.textv_pergunta.setText(pergunta);
 	}
 	public String PegarPergunta()
 	{
@@ -98,7 +119,13 @@ public class Chat extends Activity {
 			this.edit_resposta.setVisibility(View.VISIBLE);
 			
 			this.textv_resposta.setVisibility(View.INVISIBLE);
-		
+			
+			this.botaoCerto.setEnabled(false);
+			this.botaoCerto.setVisibility(View.INVISIBLE);
+			
+			this.botaoErrado.setEnabled(false);
+			this.botaoErrado.setVisibility(View.INVISIBLE);
+			
 		}else
 		{
 			// Turno de corrigir
@@ -109,9 +136,30 @@ public class Chat extends Activity {
 			this.edit_resposta.setVisibility(View.INVISIBLE);
 			
 			this.textv_resposta.setVisibility(View.VISIBLE);
+			
+			this.botaoCerto.setEnabled(true);
+			this.botaoCerto.setVisibility(View.VISIBLE);
+			
+			this.botaoErrado.setEnabled(true);
+			this.botaoErrado.setVisibility(View.VISIBLE);	
 		}
 	}
 
+	public void SetResposta(String resposta)
+	{
+		this.textv_resposta.setText(resposta);
+	}
+	
+	
+	public void onClickCerto(View v)
+	{
+		
+	}
+	public void onClickErrado(View v)
+	{
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -123,25 +171,7 @@ public class Chat extends Activity {
 	{
 		Log.i(TAG, "tentativa de enviar mensagem");
 		EditText editText = (EditText) findViewById(R.id.edit_resposta);
-		
-		
 		JogoEmSi.get().Send(editText.getText().toString());
-	}
-
-	public void ChangeInterface(boolean turn)
-	{
-		if(turn)
-		{
-			this.bt_enviar.setEnabled(true);
-			this.edit_resposta.setEnabled(true);
-			this.textv_resposta.setEnabled(false);
-			
-		}else
-		{
-			this.bt_enviar.setEnabled(false);
-			this.edit_resposta.setEnabled(false);
-			this.textv_resposta.setEnabled(true);
-		}
 	}
 	
 	public void MudarPergunta()
@@ -153,7 +183,5 @@ public class Chat extends Activity {
 	public void onDestroy()
 	{
 		super.onDestroy();
-		//MinhasCoisas.getCliente().cancel();
-
 	}
 }
