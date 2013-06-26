@@ -34,18 +34,13 @@ public class Menu_main extends Activity {
 
 		MinhasCoisas.setCurrentActivity(this);
 		setContentView(R.layout.activity_menumain);
-
-		//MinhasCoisas.setGameFonte(Typeface.createFromAsset(getAssets(),"fonts/fonte.TTF"));
-		
+				
 		btAdapter = BluetoothAdapter.getDefaultAdapter();
-
 
 		ImageButton	btcomecar = (ImageButton)findViewById (R.id.bt_comecar);
 		ImageButton btinstrucoes = (ImageButton)findViewById (R.id.bt_instrucoes);
 		ImageButton btcreditos = (ImageButton)findViewById (R.id.bt_creditos);
-
-		MinhasCoisas.Show("Bem vindo");
-		PegarPergunta();
+		
 		//Start button 
 		btcomecar.setOnClickListener(new View.OnClickListener() {
 
@@ -53,8 +48,7 @@ public class Menu_main extends Activity {
 			public void onClick(View v) {
 				try{
 
-					SoundManager.getInstance().playSound(R.raw.test_sound, "Teste");
-
+					
 					if(btAdapter != null)
 					{
 						//MinhasCoisas.Show("Este telefone possui tecnologia Bluetooth");

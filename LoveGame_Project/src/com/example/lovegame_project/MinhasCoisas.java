@@ -35,7 +35,7 @@ public class MinhasCoisas{
 		currentActivity.runOnUiThread(new Runnable(){
 			@Override
 			public void run() {
-				Toast.makeText(currentActivity, msg, Toast.LENGTH_SHORT).show();	
+				Toast.makeText(currentActivity, msg, Toast.LENGTH_SHORT ).show();	
 			}
 		});
 	}
