@@ -73,11 +73,12 @@ public class BluetoothConnectionManager implements Runnable{
 		if(btSocket != null)
 		{
 			
+			JogoEmSi.get().setTurn(true);
+			
 			Cliente cs = new Cliente(btSocket, false);
 			MinhasCoisas.setCliente(cs);
 			// Configuramos o primeiro a responder
 			
-			JogoEmSi.get().setTurn(true);
 			try {
 				mBtServerSocket.close();
 				

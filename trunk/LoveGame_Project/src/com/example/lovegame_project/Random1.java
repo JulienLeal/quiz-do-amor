@@ -8,6 +8,6 @@ public class Random1 {
     public int randomInt()
     {
     	gerador = new Random();
-    	return gerador.nextInt(45);
+    	return gerador.nextInt(44) + 1;
     }
 }

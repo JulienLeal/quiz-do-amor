@@ -107,12 +107,14 @@ public class Cliente implements Runnable{
 
 		}
 
-		byte[] bytes = new byte[100];
+
 
 		while(connected)
 		{
 			Log.i(TAG, "while - first of all");
-
+			
+			byte[] bytes = new byte[100];
+			
 			try {
 				mInputStream.read(bytes);
 				Log.i(TAG, "executou o metodo InputStream.read()");

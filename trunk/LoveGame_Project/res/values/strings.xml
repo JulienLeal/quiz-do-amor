@@ -29,5 +29,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_creditos">Creditos</string>
     <string name="title_activity_instrucoes">Instrucoes</string>
+    <string name="title_activity_fim_de_jogo">FimDeJogo</string>
 
 </resources>
